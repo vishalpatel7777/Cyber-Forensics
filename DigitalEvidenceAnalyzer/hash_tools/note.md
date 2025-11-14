@@ -1,0 +1,2 @@
+- hash function create readable info to unreadable to make secure that data
+- 
