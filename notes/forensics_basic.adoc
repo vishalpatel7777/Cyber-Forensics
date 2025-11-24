@@ -1,0 +1,330 @@
+= Digital Forensics: Modern Foundations, Investigation Workflow & Current (2025) Practices
+Vishal <patelvishal14642@gmail.com>
+:revdate: 2025-11-22
+:sectnums:
+:toc: left
+:toclevels: 3
+:icons: font
+:source-highlighter: coderay
+:stem: latexmath
+:doctype: article
+:experimental:
+:imagesdir: assets
+:project_name: Digital-Forensics-2025
+
+'''
+
+== Executive Summary
+
+[quote, "Modern Definition (2025)"]
+____
+Digital forensics is the scientific acquisition, preservation, examination, and analysis of digital evidence to reconstruct events and support legal, administrative, or intelligence investigations.
+____
+
+Cybercrime today spans unauthorized access, fraud, deception, cyber-violence, data theft, cloud intrusion, AI-assisted attacks, and exploitation of IoT and critical infrastructure.
+
+Digital Forensics enables investigators to:
+
+* identify attacker systems,
+* reconstruct timelines,
+* recover deleted or volatile evidence,
+* maintain legality through Chain of Custody,
+* produce defensible reports for use in court or incident response.
+
+The modern forensic pipeline remains built on four stages:
+
+. **Collection** – Acquire volatile → non-volatile data.
+. **Examination** – Reduce dataset to relevant scope.
+. **Analysis** – Correlate evidence and reconstruct events.
+. **Reporting** – Document findings for technical & legal stakeholders.
+
+'''
+
+== Part I: Understanding Cybercrime
+
+=== 1. Definitions
+
+* **Cyber:** Relating to digital systems, networks, cloud, virtualized infrastructure, and inter-connected devices.
+* **Crime:** Any unlawful act or omission.
+* **Cybercrime:** Any crime involving a computer, digital system, network, or cloud resource.
+
+=== 2. Role of Computers in Cybercrime
+
+==== Computer as a Target
+Attacks on servers, endpoints, IoT devices, SCADA/ICS, cloud workloads, or containers.
+
+Examples:
+
+* DDoS on critical servers  
+* Ransomware encrypting storage  
+* Cloud account takeover  
+
+==== Computer as a Tool
+The attacker uses a device or platform to commit a crime.
+
+Examples:
+
+* Threat emails  
+* Phishing campaigns  
+* Remote exploitation  
+* OSINT misuse  
+
+=== 3. Modern Categories of Cybercrime (2025)
+
+==== Cyber Trespass
+Unauthorized access across digital boundaries.  
+Examples: Wi-Fi hacking, cloud privilege escalation, container escape.
+
+==== Cyber Deception
+Fraud via phishing, smishing, deepfake impersonation, AI-crafted emails.
+
+==== Cyber Violence
+Disruption of societal or critical functions:
+
+* DDoS  
+* ICS/SCADA compromise  
+* Power grid or water plant tampering  
+* Supply chain attacks  
+
+'''
+
+== Part II: Discipline of Digital Forensics
+
+Digital forensic science focuses on:
+
+* identifying evidence,  
+* acquiring it safely,  
+* analyzing logs, memory, and systems,  
+* producing legally-defensible findings.
+
+=== 1. Branches of Digital Forensics (Updated for 2025)
+
+* **Computer Forensics** – Windows, Linux, macOS, container forensics  
+* **Mobile Forensics** – Android/iOS, encrypted messaging, app artifacts  
+* **Network Forensics** – Firewall logs, PCAPs, cloud flow logs  
+* **Cloud Forensics (New Standard)** – AWS, Azure, GCP audit logs  
+* **IoT & Hardware Forensics** – Embedded devices, routers, firmware  
+* **Memory Forensics** – RAM, volatile artifacts, live response  
+* **Malware Forensics** – Reverse engineering binaries, malware tracing  
+
+'''
+
+== Part III: The Four-Stage Forensic Investigation Process
+
+
+=== Stage 1: Collection
+
+Goal: Acquire complete and accurate evidence without altering it.
+
+==== Volatile vs Non-Volatile Data
+
+* **Volatile Data** (RAM, live connections) – lost on shutdown.  
+* **Non-Volatile Data** (disks, cloud logs) – persistent.
+
+==== Modern Order of Volatility (2025)
+
+. Memory (RAM, volatile artifacts)
+. Running processes + handle tables
+. Open network connections
+. Logged-in sessions + tokens
+. Cloud activity logs (AWS CloudTrail, Azure ActivityLogs)
+. Disk images
+. Backups and snapshots (VM, container, cloud volume snapshots)
+
+==== Initial Actions (Updated)
+
+* Computers → Isolate from network; DO NOT shut down.  
+* Cloud Systems → Snapshot instances, export audit logs.  
+* Mobiles → Airplane mode ON without removing SIM/eSIM.  
+* Containers → Pause container, export runtime state.  
+
+[IMPORTANT]
+====
+Never run tools that modify timestamps, metadata, or memory structure on the affected machine.
+====
+
+'''
+
+=== Stage 2: Examination
+
+Focus: Reduce raw data → relevant evidence.
+
+Techniques include:
+
+* keyword/indicator filtering  
+* attacker-IP isolation  
+* log correlation  
+* hash comparison  
+* extraction of artifacts (registry, browser, session tokens, syslogs)
+
+'''
+
+=== Stage 3: Analysis
+
+Goal: Reconstruct what happened.
+
+Tasks:
+
+* Identify attacker path  
+* Build event timeline  
+* Correlate host, network, and cloud data  
+* Identify individuals/systems involved  
+* Decode malware or scripts  
+* Understand motive, method, and impact  
+
+Analysis uses:
+
+* Timeline reconstruction tools  
+* Correlation graphs  
+* Volatility/Redline (memory)  
+* PCAP analysis  
+* SIEM-based correlation (Splunk/ELK/Wazuh)  
+
+'''
+
+=== Stage 4: Reporting
+
+Report must include:
+
+* Objective and summary  
+* All evidence sources  
+* Tools used  
+* Hash values  
+* Steps taken  
+* Legal constraints or gaps  
+* Recommendations  
+
+Audience-based:
+
+* **Technical** → logs, artifacts, processes  
+* **Management** → business risk, impact, remediation  
+
+'''
+
+== Part IV: Evidence Management & Chain of Custody
+
+=== 1. Chain of Custody (CoC)
+
+Formal record:
+
+* who collected evidence  
+* when it was collected  
+* how it was stored  
+* hash values for verification  
+* transfer and access logs  
+
+[example,title="Sample CoC Entry"]
+====
+Item: Disk Image  
+Hash: SHA-256 (auto-generated)  
+Collected By: Investigator #21  
+Transferred To: Lab Storage  
+Timestamp: 2025-11-22  
+====
+
+'''
+
+=== 2. Good Evidence Principles (Modernized)
+
+. **Work only on a forensic copy**  
+. **Create bit-by-bit / sector-by-sector images**  
+. **Use hardware write-blockers**  
+. **Preserve original media with tamper-evident bags**  
+. **Document EVERYTHING**  
+. **Maintain order of volatility**  
+. **Generate cryptographic hash (SHA-256 preferred)**  
+
+'''
+
+== Part V: Modern Investigation Strategy (2025)
+
+A professional forensic operation requires:
+
+. Understand objectives (attack intent, impact, timeline).  
+. Assess environment (cloud, hybrid, container, mobile).  
+. Identify evidence sources (endpoints, SIEM, firewalls, cloud).  
+. Estimate evidence value (direct > indirect).  
+. Prioritize based on volatility + relevance.  
+. Plan acquisition carefully (20–30% of total time).
+
+[TIP]
+====
+Today's investigations require cloud-native evidence (CloudTrail, VPC Flow Logs, Azure Sign-ins) as mandatory sources.
+====
+
+'''
+
+== Part VI: Tools & Forensic File Formats (Updated for 2025)
+
+=== 1. Modern Forensic Tools
+
+[cols="2,3",options="header"]
+|===
+| Tool | Purpose
+
+| SIFT Workstation (2025 Edition) | Full IR suite, cloud forensics, memory tools  
+| FTK Imager | Forensic image acquisition, hashing  
+| Autopsy (Sleuth Kit) | GUI analysis of disk images  
+| Velociraptor | Live response, remote forensic collection  
+| CyberChef | Data transformation & decoding  
+| Wazuh / ELK | Log analysis & SIEM correlation  
+| Volatility 3 | Memory forensics (modern kernel support)  
+| Wireshark | Network packet analysis  
+| CloudTrail / Azure Sentinel | Cloud-native forensic logging  
+| DFIR-Orchestrator | Enterprise evidence automation  
+|===
+
+'''
+
+=== 2. Forensic Image & Evidence Formats (2025)
+
+[cols="2,3",options="header"]
+|===
+| Format | Usage
+
+| RAW / dd | Bit-by-bit disk image  
+| AFF / AFF4 | Modern extensible forensic image format  
+| E01 | EnCase image, widely used  
+| VMDK / VHDX | Virtual machine disk images  
+| .mem / .vmem | Memory dumps  
+| JSON Cloud Logs | CloudTrail, AzureLogAnalytics, GCP Logs  
+| HAR | Browser forensic artifact  
+|===
+
+'''
+
+== Analogy: Digital Forensics Like Archaeology
+
+[sidebar,title="Analogy"]
+****
+Digital forensics resembles archaeological excavation:
+
+* Instead of soil → logs, memory, packets  
+* Instead of bones → artifacts, deleted files  
+* Instead of carbon dating → timestamps & hashes  
+
+Just as archaeologists preserve the original site, forensic experts always work on a **bit-by-bit copy**.
+****
+
+'''
+
+== Final Insights
+
+CAUTION:   Any alteration to original evidence can invalidate the entire investigation.
+ 
+TIP:  Modern attacks require combining endpoint, network, and cloud evidence.
+
+NOTE: Forensics today is not just digital—it is multidisciplinary: cloud, AI artifacts, memory, logs, containers, and human behavior.
+
+'''
+
+== Alternate Perspectives and Further Learning
+
+. NIST SP 800-86 (Updated Digital Forensics Guide)  
+. SANS DFIR Whitepapers  
+. Autopsy & SleuthKit Documentation  
+. AWS Cloud Forensics Playbook  
+. MITRE ATT&CK Incident Mapping  
+. Volatility 3 Framework Docs  
+
+'''
